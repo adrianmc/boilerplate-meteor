@@ -1,0 +1,39 @@
+<template name="header">
+
+<div class="fixed">
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="{{pathFor 'home'}}">
+            meteor-boilerplate
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right btn-group">
+        
+        {{#if currentUser}}
+          <!-- Buttons for logged-in user -->
+        {{/if}}
+        
+        <li><a href="#">Contact</a></li>
+        
+        
+        {{#if currentUser}}
+          <li><a href="#">{{currentUser.emails.[0].address}}</a></li>
+        {{else}}
+          <li><a href="{{pathFor 'siteLogin'}}">Sign in</a></li>
+        {{/if}}
+
+      </ul>
+    </section>
+  </nav>
+</div>
+
+</template>

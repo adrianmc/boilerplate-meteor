@@ -4,6 +4,7 @@
 declare -a packages=(
 	underscore
 	ewall:foundation
+	stylus
 	iron:router
 	)
 
@@ -12,6 +13,22 @@ declare -a packages=(
 #
 #
 #
+
+function getScriptPath()
+{
+	# attribution: http://stackoverflow.com/questions/630372/determine-the-path-of-the-executing-bash-script
+	MY_PATH="`dirname \"$0\"`"              # relative
+	MY_PATH="`( cd \"$MY_PATH\" && pwd )`"  # absolutized and normalized
+	if [ -z "$MY_PATH" ] ; then
+	  # error; for some reason, the path is not accessible
+	  # to the script (e.g. permissions re-evaled after suid)
+	  exit 1  # fail
+	fi
+	scriptPath="$MY_PATH"
+}
+getScriptPath
+
+# echo $scriptPath
 
 # Check to make sure a project name is provided
 if [ $# -eq 0 ]; then
@@ -39,29 +56,13 @@ done
 echo "Setting up file structure..."
 mkdir client server lib public packages
 
-# Client stuff
-cd client
-	mkdir stylesheets templates templates/includes templates/application
-	touch main.html stylesheets/styles.css 
-	cd templates
-		cd application
-			touch layout.html not_found.html access_denied.html site_login.html
-		cd ..
-		cd includes
-			touch footer.html header.html
-		cd ..
-	cd ..
-cd ..
+# Copying over client and lib files and folders
+cp -r $scriptPath/client .
+cp -r $scriptPath/lib .
 
 # Server stuff
 cd server
 	touch fixtures.js publications.js
-cd ..
-
-# Lib stuff - remember, stuff in here executes first
-cd lib
-	mkdir collections
-	touch router.js
 cd ..
 
 # Public stuff - static files like images

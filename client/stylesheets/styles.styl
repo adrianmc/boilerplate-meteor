@@ -1,0 +1,48 @@
+/* Header Variables */
+header-height = 2.8125rem
+header-bg-color = green
+header-name-color = red
+header-name-bg-color = blue
+header-btn-color = pink
+header-btn-text-color = red
+header-btn-accent-color = #F94409
+header-btn-accent-color-hover = #FF9900
+header-btn-accent-height = 4px
+
+/* Footer Variables */
+footer-height = 6rem
+
+html, body
+  height 100%
+
+.top-bar
+  height header-height
+  line-height header-height
+  background-color header-bg-color
+  & .title-area
+    background-color header-name-bg-color
+    & .name h1 a
+      color header-name-color
+      border-right: 6px solid header-btn-accent-color;
+        &:hover
+          border-right: 6px solid header-btn-accent-color-hover;
+  & .top-bar-section
+      & .btn-group li
+        background-color header-btn-color
+        & a
+          color header-btn-text-color
+          background-color header-btn-color !important
+          border-bottom header-btn-accent-height solid header-btn-accent-color
+          margin-bottom -header-btn-accent-height
+          &:hover
+            border-bottom header-btn-accent-height solid header-btn-accent-color-hover  
+
+.container
+  padding-top header-height
+  padding-bottom footer-height
+  min-height 100%
+  margin 0 auto (- footer-height - 0.17rem) /* the bottom margin is the negative value of the footer's height */
+
+.footer, .push
+  height footer-height /* .push must be the same height as .footer */
+  background-color red
