@@ -42,7 +42,15 @@ mkdir client server lib public packages
 # Client stuff
 cd client
 	mkdir stylesheets templates templates/includes templates/application
-	touch main.html stylesheets/styles.css templates/application/layout.html
+	touch main.html stylesheets/styles.css 
+	cd templates
+		cd application
+			touch layout.html not_found.html access_denied.html site_login.html
+		cd ..
+		cd includes
+			touch footer.html header.html
+		cd ..
+	cd ..
 cd ..
 
 # Server stuff
