@@ -31,17 +31,34 @@ rm $1.css $1.html $1.js
 echo "Installing custom packages..."
 for t in "${packages[@]}"
 do
-	meteor add $t &> /dev/null
 	echo "    Installing: $t"
+	meteor add $t &> /dev/null	
 done
 
 # Setting up file structure
 echo "Setting up file structure..."
-mkdir client server lib public
-cd client
-mkdir stylesheets templates templates/includes templates/application
+mkdir client server lib public packages
 
-# Create files
-touch main.html stylesheets/styles.css
+# Client stuff
+cd client
+	mkdir stylesheets templates templates/includes templates/application
+	touch main.html stylesheets/styles.css templates/application/layout.html
+cd ..
+
+# Server stuff
+cd server
+	touch fixtures.js publications.js
+cd ..
+
+# Lib stuff - remember, stuff in here executes first
+cd lib
+	mkdir collections
+	touch router.js
+cd ..
+
+# Public stuff - static files like images
+cd public
+	mkdir images
+cd ..
 
 printf "\nDone!\n"
